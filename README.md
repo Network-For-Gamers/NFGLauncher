@@ -10,9 +10,7 @@
 
 <p align="center">Join modded servers without worrying about installing Java, Forge, or other mods. We'll handle that for you.</p>
 
-![Screenshot 1](https://i.imgur.com/6o7SmH6.png)
-![Screenshot 2](https://i.imgur.com/x3B34n1.png)
-
+![Screenshot 1](https://cds.networkforgamers.com/launcher/assets/images/github.png)
 ## Features
 
 * 🔒 Full account management.
@@ -40,18 +38,9 @@ This is not an exhaustive list. Download and install the launcher to gauge all i
 
 ## Downloads
 
-You can download from [GitHub Releases](https://github.com/Network-For-Gamers/NFGLauncher/releases)
-
-#### Latest Release
-
-[![](https://img.shields.io/github/release/Network-For-Gamers/NFGLauncher.svg?style=flat-square)](https://github.com/dscalzi/HeliosLauncher/releases/latest)
-
-#### Latest Pre-Release
-[![](https://img.shields.io/github/release/Network-For-Gamers/NFGLauncher/all.svg?style=flat-square)](https://github.com/dscalzi/HeliosLauncher/releases)
-
 **Supported Platforms**
 
-If you download from the [Releases](https://github.com/Network-For-Gamers/NFGLauncher/releases) tab, select the installer for your system.
+If you download from the [Releases](https://cds.networkforgamers.com/launcher/build/NFG-Launcher-setup-latest.exe) tab, select the installer for your system.
 
 | Platform | File |
 | -------- | ---- |
