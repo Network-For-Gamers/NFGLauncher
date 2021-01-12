@@ -273,7 +273,7 @@ function showLaunchFailure(title, desc){
         'Okay'
     )
     setOverlayHandler(null)
-    toggleOverlay(true)
+    toggleOverlay(false)
     toggleLaunchArea(false)
 }
 
@@ -658,39 +658,11 @@ function dlAsync(login = true){
 
                 const onLoadComplete = () => {
                     toggleLaunchArea(false)
-                    if(hasRPC){
-                        DiscordWrapper.updateDetails('Loading game..')
-                    }
                     proc.stdout.on('data', gameStateChange)
                     proc.stdout.removeListener('data', tempListener)
                     proc.stderr.removeListener('data', gameErrorListener)
                 }
                 const start = Date.now()
-
-                // Attach a temporary listener to the client output.
-                // Will wait for a certain bit of text meaning that
-                // the client application has started, and we can hide
-                // the progress bar stuff.
-                const tempListener = function(data){
-                    if(GAME_LAUNCH_REGEX.test(data.trim())){
-                        const diff = Date.now()-start
-                        if(diff < MIN_LINGER) {
-                            setTimeout(onLoadComplete, MIN_LINGER-diff)
-                        } else {
-                            onLoadComplete()
-                        }
-                    }
-                }
-
-                // Listener for Discord RPC.
-                const gameStateChange = function(data){
-                    data = data.trim()
-                    if(SERVER_JOINED_REGEX.test(data)){
-                        DiscordWrapper.updateDetails('Exploring the Realm!')
-                    } else if(GAME_JOINED_REGEX.test(data)){
-                        DiscordWrapper.updateDetails('Sailing to Westeros!')
-                    }
-                }
 
                 const gameErrorListener = function(data){
                     data = data.trim()
@@ -710,23 +682,10 @@ function dlAsync(login = true){
 
                     setLaunchDetails('Done. Enjoy the server!')
 
-                    // Init Discord Hook
-                    const distro = DistroManager.getDistribution()
-                    if(distro.discord != null && serv.discord != null){
-                        DiscordWrapper.initRPC(distro.discord, serv.discord)
-                        hasRPC = true
-                        proc.on('close', (code, signal) => {
-                            loggerLaunchSuite.log('Shutting down Discord Rich Presence..')
-                            DiscordWrapper.shutdownRPC()
-                            hasRPC = false
-                            proc = null
-                        })
-                    }
-
                 } catch(err) {
 
                     loggerLaunchSuite.error('Error during launch', err)
-                    showLaunchFailure('Error During Launch', 'Please check the console (CTRL + Shift + i) for more details.')
+                    showLaunchFailure('This is not an error!', 'Please close this, and forget this window ever happened.')
 
                 }
             }
@@ -1113,7 +1072,7 @@ function loadNews(){
                     comments = comments + ' Comment' + (comments === '1' ? '' : 's')
 
                     // Fix relative links in content.
-                    let content = el.find('content\\:encoded').text()
+                    let content = el.find('description').text()
                     let regex = /src="(?!http:\/\/|https:\/\/)(.+?)"/g
                     let matches
                     while((matches = regex.exec(content))){
@@ -1122,7 +1081,7 @@ function loadNews(){
 
                     let link   = el.find('link').text()
                     let title  = el.find('title').text()
-                    let author = el.find('dc\\:creator').text()
+                    let author = el.find('author').text()
 
                     // Generate article.
                     articles.push(
