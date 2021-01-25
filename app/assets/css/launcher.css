@@ -483,6 +483,20 @@ body, button {
     color: #8b8b8b;
 }
 
+/* Header on login view. */
+#loginSubheader {
+    font-family: 'Avenir Medium';
+    margin-bottom: 25px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+#loginMSButton{
+    background-color: rgba(255, 255, 255, 0);
+    color: white;
+}
+
 /* Logo on login form. */
 #loginImageSeal {
     border-radius: 50%;
@@ -492,15 +506,6 @@ body, button {
     width: 125px;
     box-shadow: 0px 0px 10px 0px rgb(0, 0, 0);
     margin-bottom: 20px;
-}
-
-/* Header on login view. */
-#loginSubheader {
-    font-family: 'Avenir Medium';
-    margin-bottom: 25px;
-    font-size: 12px;
-    letter-spacing: 1px;
-    font-weight: bold;
 }
 
 /* Container to organize login field elements. */
@@ -961,7 +966,7 @@ body, button {
 }
 .settingsNavItem[selected] {
     cursor: default;
-    color: white;
+    color: rgba(255, 255, 255, 0);
     text-shadow: none;
 }
 
