@@ -1806,7 +1806,8 @@ class AssetGuard extends EventEmitter {
 
                     } else {
 
-                        req.abort()
+                        //req.abort()
+                        req.resume()
                         console.log(`Failed to download ${asset.id}(${typeof asset.from === 'object' ? asset.from.url : asset.from}). Response code ${resp.statusCode}`)
                         self.progress += asset.size*1
                         self.emit('progress', 'download', self.progress, self.totaldlsize)
@@ -1869,7 +1870,7 @@ class AssetGuard extends EventEmitter {
      * 
      * @param {Array.<{id: string, limit: number}>} identifiers Optional. The identifiers to process and corresponding parallel async task limit.
      */
-    processDlQueues(identifiers = [{id:'assets', limit:20}, {id:'libraries', limit:5}, {id:'files', limit:5}, {id:'forge', limit:5}]){
+    processDlQueues(identifiers = [{id:'assets', limit:20}, {id:'libraries', limit:20}, {id:'files', limit:20}, {id:'forge', limit:20}]){
         return new Promise((resolve, reject) => {
             let shouldFire = true
 
