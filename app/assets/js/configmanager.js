@@ -76,17 +76,10 @@ const DEFAULT_CONFIG = {
             maxRAM: resolveMaxRAM(), // Dynamic
             executable: null,
             jvmOptions: [
-                '-XX:+UseG1GC',
-                '-XX:+UseConcMarkSweepGC',
-                '-XX:+CMSIncrementalMode',
-                '-XX:-UseAdaptiveSizePolicy',
-                '-Xmn128M',
-                '-Dsun.rmi.dgc.server.gcInterval=2147483646',
-                '-XX:+UnlockExperimentalVMOptions',
-                '-XX:G1NewSizePercent=20',
-                '-XX:G1ReservePercent=20',
-                '-XX:MaxGCPauseMillis=50',
-                '-XX:G1HeapRegionSize=32M'
+            '-XX:+UseConcMarkSweepGC',
+            '-XX:+CMSIncrementalMode',
+            '-XX:-UseAdaptiveSizePolicy',
+            '-Xmn128M'
             ],
         },
         game: {
