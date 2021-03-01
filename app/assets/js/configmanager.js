@@ -6,7 +6,7 @@ const logger = require('./loggerutil')('%c[ConfigManager]', 'color: #a02d2a; fon
 
 const sysRoot = process.env.APPDATA || (process.platform == 'darwin' ? process.env.HOME + '/Library/Application Support' : process.env.HOME)
 // TODO change
-const dataPath = path.join(sysRoot, '.helioslauncher')
+const dataPath = path.join(sysRoot, '.nfglauncher')
 
 // Forked processes do not have access to electron, so we have this workaround.
 const launcherDir = process.env.CONFIG_DIRECT_PATH || require('electron').remote.app.getPath('userData')
@@ -45,7 +45,7 @@ const firstLaunch = !fs.existsSync(configPath) && !fs.existsSync(configPathLEGAC
 
 exports.getAbsoluteMinRAM = function(){
     const mem = os.totalmem()
-    return mem >= 6000000000 ? 3 : 2
+    return mem >= 2000000000 ? 1 : 0.5
 }
 
 exports.getAbsoluteMaxRAM = function(){
@@ -56,7 +56,7 @@ exports.getAbsoluteMaxRAM = function(){
 
 function resolveMaxRAM(){
     const mem = os.totalmem()
-    return mem >= 8000000000 ? '4G' : (mem >= 6000000000 ? '3G' : '2G')
+    return mem >= 4000000000 ? '2G' : (mem >= 3000000000 ? '1.5G' : '1G')
 }
 
 function resolveMinRAM(){
@@ -76,10 +76,17 @@ const DEFAULT_CONFIG = {
             maxRAM: resolveMaxRAM(), // Dynamic
             executable: null,
             jvmOptions: [
+                '-XX:+UseG1GC',
                 '-XX:+UseConcMarkSweepGC',
                 '-XX:+CMSIncrementalMode',
                 '-XX:-UseAdaptiveSizePolicy',
-                '-Xmn128M'
+                '-Xmn128M',
+                '-Dsun.rmi.dgc.server.gcInterval=2147483646',
+                '-XX:+UnlockExperimentalVMOptions',
+                '-XX:G1NewSizePercent=20',
+                '-XX:G1ReservePercent=20',
+                '-XX:MaxGCPauseMillis=50',
+                '-XX:G1HeapRegionSize=32M'
             ],
         },
         game: {
@@ -87,7 +94,7 @@ const DEFAULT_CONFIG = {
             resHeight: 720,
             fullscreen: false,
             autoConnect: true,
-            launchDetached: true
+            launchDetached: false
         },
         launcher: {
             allowPrerelease: false,
@@ -103,8 +110,7 @@ const DEFAULT_CONFIG = {
     selectedServer: null, // Resolved
     selectedAccount: null,
     authenticationDatabase: {},
-    modConfigurations: [],
-    microsoftAuth: {}
+    modConfigurations: []
 }
 
 let config = null
