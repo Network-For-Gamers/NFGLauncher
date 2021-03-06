@@ -341,14 +341,13 @@ exports.updateAuthAccount = function(uuid, accessToken){
  * 
  * @returns {Object} The authenticated account object created by this action.
  */
-exports.addAuthAccount = function(uuid, accessToken, username, displayName, expiresAt = null, type = 'mojang'){
+exports.addAuthAccount = function(uuid, accessToken, username, displayName, type = 'mojang'){
     config.selectedAccount = uuid
     config.authenticationDatabase[uuid] = {
         accessToken,
         username: username.trim(),
         uuid: uuid.trim(),
         displayName: displayName.trim(),
-        expiresAt: expiresAt,
         type: type
     }
     return config.authenticationDatabase[uuid]
