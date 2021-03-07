@@ -78,8 +78,8 @@ If you want to export the console output, simply right click anywhere on the con
 **Clone and Install Dependencies**
 
 ```console
-> git clone https://github.com/dscalzi/HeliosLauncher.git
-> cd HeliosLauncher
+> git clone https://github.com/Network-For-Gamers/NFGLauncher.git
+> cd NFGLauncher
 > npm install
 ```
 
