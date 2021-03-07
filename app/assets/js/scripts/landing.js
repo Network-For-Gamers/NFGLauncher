@@ -273,6 +273,23 @@ function showLaunchFailure(title, desc){
         'Okay'
     )
     setOverlayHandler(null)
+    toggleOverlay(true)
+    toggleLaunchArea(false)
+}
+
+/**
+ * Shows an error overlay, toggles off the launch area.
+ * 
+ * @param {string} title The overlay title.
+ * @param {string} desc The overlay description.
+ */
+function showLaunchFailureFabric(title, desc){
+    setOverlayContent(
+        title,
+        desc,
+        'Okay'
+    )
+    setOverlayHandler(null)
     toggleOverlay(false)
     toggleLaunchArea(false)
 }
@@ -685,7 +702,7 @@ function dlAsync(login = true){
                 } catch(err) {
 
                     loggerLaunchSuite.error('Error during launch', err)
-                    showLaunchFailure('This is not an error!', 'Please close this, and forget this window ever happened.')
+                    showLaunchFailureFabric('This is not an error!', 'Please close this, and forget this window ever happened.')
 
                 }
             }
