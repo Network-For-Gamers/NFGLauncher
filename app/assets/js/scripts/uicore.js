@@ -20,7 +20,6 @@ process.traceProcessWarnings = true
 process.traceDeprecation = true
 
 // Disable eval function.
-// eslint-disable-next-line
 window.eval = global.eval = function () {
     throw new Error('Sorry, this app does not support window.eval().')
 }
@@ -38,7 +37,7 @@ webFrame.setVisualZoomLevelLimits(1, 1)
 
 // Initialize auto updates in production environments.
 let updateCheckListener
-/*if(!isDev){
+if(!isDev){
     ipcRenderer.on('autoUpdateNotification', (event, arg, info) => {
         switch(arg){
             case 'checking-for-update':
@@ -49,7 +48,7 @@ let updateCheckListener
                 loggerAutoUpdater.info('New update available', info.version)
                 
                 if(process.platform === 'darwin'){
-                    info.darwindownload = `https://github.com/dscalzi/MissGamerz/NFGLauncher/releases/download/v${info.version}/NFG-Launcher-setup-${info.version}${process.arch === 'arm64' ? '-arm64' : '-x64'}.dmg`
+                    info.darwindownload = `https://github.com/dscalzi/HeliosLauncher/releases/download/v${info.version}/Helios-Launcher-setup-${info.version}${process.arch === 'arm64' ? '-arm64' : '-x64'}.dmg`
                     showUpdateUI(info)
                 }
                 
@@ -91,7 +90,7 @@ let updateCheckListener
                 break
         }
     })
-}*/
+}
 
 /**
  * Send a notification to the main process changing the value of
